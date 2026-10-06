@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alt1 RS3 Bank Organizer Layout Guide</title>
+    <style>
+        body {
+            background-color: #11161B;
+            color: #D1D6DB;
+            font-family: Arial, sans-serif;
+            padding: 15px;
+            margin: 0;
+            font-size: 13px;
+        }
+        h2 { color: #FF9800; font-size: 16px; border-bottom: 1px solid #333; padding-bottom: 5px; margin-top: 0; }
+        h3 { color: #4CAF50; font-size: 14px; margin-bottom: 5px; }
+        p { margin: 5px 0 10px 0; line-height: 1.4; }
+        .tab-box {
+            background-color: #1B2228;
+            border: 1px solid #2A343F;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        ul { margin: 5px 0; padding-left: 20px; }
+        li { margin-bottom: 3px; }
+        .highlight { color: #FFC107; font-weight: bold; }
+        .btn {
+            background-color: #FF9800;
+            color: #000;
+            border: none;
+            padding: 6px 12px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .btn:hover { background-color: #E08600; }
+        .status { font-style: italic; color: #888; font-size: 11px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <h2>🎒 RS3 Bank Layout Guide (Alt1)</h2>
+    <p>Since Alt1 cannot move items for you, use this overlay checklist pane to sort your tabs side-by-side with your open bank.</p>
+    
+    <button class="btn" onclick="checkLayout()">Verify Screen Alignment</button>
+    <div class="status" id="status-text">Ready to assist. Open your bank in-game.</div>
+    <br>
+
+    <div class="tab-box">
+        <h3>🏠 Tab 0: General & Currencies</h3>
+        <p>Your drop-everything-here dump zone.</p>
+        <ul>
+            <li>Coins, Spirit Shards, and Bonds</li>
+            <li>Teleport items (Max Guild, War's Retreat)</li>
+            <li>Current active slayer/boss drops</li>
+        </ul>
+    </div>
+
+    <div class="tab-box">
+        <h3>⚔️ Tab 1: PVM & Combat Gear</h3>
+        <p>Keep your absolute best gear ready for rapid deployment.</p>
+        <ul>
+            <li>T90+ Power Armour sets (Melee, Range, Mage, Necro)</li>
+            <li>BiS Weapons, EOF Amulets, and God Books</li>
+            <li>Vulnerability bombs, Powerbursts, Adrenaline renewals</li>
+        </ul>
+    </div>
+
+    <div class="tab-box">
+        <h3>🧪 Tab 2: Herblore & Potions</h3>
+        <p>Order by dose size to prevent bank slot wastage.</p>
+        <ul>
+            <li>Clean/Grimy Herbs & Secondary ingredients</li>
+            <li>Overloads, Extremes, and Super sets</li>
+            <li>Flasks arranged dynamically (6-dose down to 1-dose)</li>
+        </ul>
+    </div>
+
+    <div class="tab-box">
+        <h3>🌲 Tab 3: Skilling & Resources</h3>
+        <p>Group materials together based on current leveling goals.</p>
+        <ul>
+            <li>Logs, Ores, Bars, and Uncut Gems</li>
+            <li>Archeology materials and damaged artifacts</li>
+            <li>Urns, Proteans, and Skilling Outfits</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkLayout() {
+            const status = document.getElementById('status-text');
+            if (window.alt1) {
+                try {
+                    let img = alt1.bindRegion(0, 0, alt1.rsWidth, alt1.rsHeight);
+                    if (img) {
+                        status.innerText = "Connected to RS3! Canvas size: " + alt1.rsWidth + "x" + alt1.rsHeight;
+                        status.style.color = "#4CAF50";
+                    } else {
+                        status.innerText = "Couldn't bind to screen. Is RS3 focused?";
+                        status.style.color = "#F44336";
+                    }
+                } catch(e) {
+                    status.innerText = "Alt1 API Error: " + e.message;
+                }
+            } else {
+                status.innerText = "Not running inside Alt1 client. View this inside the Alt1 browser!";
+                status.style.color = "#FFC107";
+            }
+        }
+    </script>
+</body>
+</html>
